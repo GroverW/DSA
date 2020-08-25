@@ -17,3 +17,17 @@ const buildList = (list) => {
 
   return head.next;
 }
+
+const serializeList = (head) => {
+  const nodeVals = [];
+  let curr = head;
+
+  while(curr) {
+    nodeVals.push(curr.val);
+    curr = curr.next;
+  }
+
+  return nodeVals;
+}
+
+export { buildList, serializeList };
