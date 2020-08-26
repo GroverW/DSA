@@ -1,4 +1,4 @@
-import { Node, buildList, serializeList } from './helpers';
+import { ListNode, buildList, serializeList } from './helpers';
 
 
 var sortList = function (head) {
@@ -10,7 +10,7 @@ var sortList = function (head) {
 };
 
 const splitList = (head) => {
-  const pointer = new Node();
+  const pointer = new ListNode();
   pointer.next = head;
   let slow = pointer;
   let fast = pointer;
@@ -29,7 +29,7 @@ const splitList = (head) => {
 }
 
 const mergeLists = (list1, list2) => {
-  let head = new Node();
+  let head = new ListNode();
   let curr = head;
 
   while (list1 || list2) {

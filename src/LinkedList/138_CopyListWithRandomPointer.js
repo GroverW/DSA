@@ -34,7 +34,7 @@ Explanation: Given linked list is empty (null pointer), so return null.
 
 var copyRandomList = function(head) {
   if(!head) return null;
-  const start = new Node(head.val);
+  const start = new ListNode(head.val);
   let curr = head;
   let clone = start;
 
@@ -43,19 +43,19 @@ var copyRandomList = function(head) {
   nodes.set(curr, clone);
 
   if(curr.random) {
-      clone.random = nodes.get(curr.random) || new Node(curr.random.val);
+      clone.random = nodes.get(curr.random) || new ListNode(curr.random.val);
       nodes.set(curr.random, clone.random);
   }
 
   curr = curr.next;
 
   while(curr) {
-      clone.next = nodes.get(curr) || new Node(curr.val);
+      clone.next = nodes.get(curr) || new ListNode(curr.val);
       clone = clone.next;
       nodes.set(curr, clone)
 
       if(curr.random) {
-          clone.random = nodes.get(curr.random) || new Node(curr.random.val);
+          clone.random = nodes.get(curr.random) || new ListNode(curr.random.val);
           nodes.set(curr.random, clone.random);
       }
 

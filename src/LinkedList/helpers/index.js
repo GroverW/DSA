@@ -1,4 +1,4 @@
-class Node {
+class ListNode {
   constructor(val, next) {
     this.val = val || null;
     this.next = next || null;
@@ -6,11 +6,11 @@ class Node {
 }
 
 const buildList = (list) => {
-  const head = new Node();
+  const head = new ListNode();
   let curr = head;
 
   for(let val of list) {
-    const node = new Node(val);
+    const node = new ListNode(val);
     curr.next = node;
     curr = curr.next;
   }
@@ -30,4 +30,4 @@ const serializeList = (head) => {
   return nodeVals;
 }
 
-export { Node, buildList, serializeList };
+export { ListNode, buildList, serializeList };
