@@ -30,4 +30,4 @@ const serializeList = (head) => {
   return nodeVals;
 }
 
-export { buildList, serializeList };
+export { Node, buildList, serializeList };
