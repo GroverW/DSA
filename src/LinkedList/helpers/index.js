@@ -1,11 +1,11 @@
-class ListNode {
-  constructor(val, next) {
-    this.val = val || null;
-    this.next = next || null;
+export class ListNode {
+  constructor(val = null, next = null) {
+    this.val = val;
+    this.next = next;
   }
 }
 
-const buildList = (list) => {
+export const buildList = (list) => {
   const head = new ListNode();
   let curr = head;
 
@@ -18,7 +18,7 @@ const buildList = (list) => {
   return head.next;
 }
 
-const serializeList = (head) => {
+export const serializeList = (head) => {
   const nodeVals = [];
   let curr = head;
 
@@ -30,4 +30,4 @@ const serializeList = (head) => {
   return nodeVals;
 }
 
-export { ListNode, buildList, serializeList };
+export const printList = (head) => serializeList(head).join('->');
