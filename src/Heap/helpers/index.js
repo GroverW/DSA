@@ -42,12 +42,12 @@ class Heap {
     while (true) {
       const left = curr * 2 + 1;
       const right = left + 1;
-      let next;
+      let next = curr;
 
-      if (this.comparator(arr[left], arr[curr])) next = left;
-      if (this.comparator(arr[right], arr[left])) next = right;
+      if (this.comparator(arr[next], arr[left])) next = left;
+      if (this.comparator(arr[next], arr[right])) next = right;
 
-      if (next !== undefined) {
+      if (next !== curr) {
         [arr[next], arr[curr]] = [arr[curr], arr[next]];
         curr = next;
       } else {
