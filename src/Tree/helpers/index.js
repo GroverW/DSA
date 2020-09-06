@@ -4,7 +4,8 @@ export const TreeNode = function(val) {
   this.right = null;
 }
 
-const buildTree = (vals) => {
+export const buildTree = (vals) => {
+  if(!vals.length) return null;
   const root = new TreeNode(vals.shift())
   const queue = [root];
 
@@ -26,5 +27,3 @@ const buildTree = (vals) => {
 
   return root;
 }
-
-export default buildTree;
