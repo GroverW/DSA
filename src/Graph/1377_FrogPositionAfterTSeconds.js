@@ -38,6 +38,11 @@ edges[i].length == 2
 Answers within 10^-5 of the actual value will be accepted as correct.
 */
 
+
+/*
+  A little slow
+  faster to turn into directed tree by only adding larger node as child of smaller node.
+*/
 var frogPosition = function (n, edges, t, target) {
   const connections = new Array(n + 1).fill(null).map(() => []);
   const chances = new Array(n + 1).fill(0);
