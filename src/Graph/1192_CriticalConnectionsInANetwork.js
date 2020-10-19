@@ -48,3 +48,44 @@ const tests = [
 for(let test of tests) {
   logOutList(criticalConnections(...test))
 }
+
+
+// 10/19/2020 retried
+
+var criticalConnections = function (n, connections) {
+  const graph = buildGraph(n, connections);
+  const ranks = new Array(n).fill(0);
+  const lowest = new Array(n).fill(Infinity);
+  let currRank = 1;
+  const critConnections = [];
+
+  const findConnections = (nodeId, parentId) => {
+    if (ranks[nodeId]) return lowest[nodeId];
+    ranks[nodeId] = currRank;
+    lowest[nodeId] = currRank;
+    currRank += 1;
+
+    for (let neighbor of graph[nodeId]) {
+      if (neighbor === parentId) continue;
+      const minNeighborRank = findConnections(neighbor, nodeId);
+      if (minNeighborRank > ranks[nodeId]) critConnections.push([nodeId, neighbor]);
+      lowest[nodeId] = Math.min(lowest[nodeId], minNeighborRank);
+    }
+
+    return lowest[nodeId];
+  }
+
+  findConnections(0, null);
+
+  return critConnections;
+};
+
+const buildGraph = (n, edges) => {
+  const graph = new Array(n).fill(null).map(() => []);
+  for (let [from, to] of edges) {
+    graph[from].push(to);
+    graph[to].push(from);
+  }
+
+  return graph;
+}
