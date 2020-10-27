@@ -38,3 +38,38 @@ var lengthOfLongestSubstring = function (s) {
 
   return Math.max(longest, sub.length);
 };
+
+// cleaner
+var lengthOfLongestSubstring = function (s) {
+  let start = 0;
+  let maxLength = 0;
+  const used = new Set();
+
+  for (let i = 0; i < s.length; i += 1) {
+    const character = s[i];
+    while (used.has(character)) {
+      used.delete(s[start]);
+      start += 1;
+    }
+
+    used.add(character);
+    maxLength = Math.max(maxLength, i - start + 1);
+  }
+
+  return maxLength;
+};
+
+const tests = [
+  "abcabcbb",
+  "bbbbb",
+  "pwwkew",
+  "apIASHPEWIOpaoisdhowiefhpSOIhPSIHFDpwoiefnap29 pasdihf _@(*H 2-hsa ",
+  "padisn 123piasd -2 -avjcxb23 j",
+  "apdsaipah9-8dsav- a9 8d-ha -",
+  "apibcvaOIPE!@pwfenQnpiOFHiu-",
+  "aAbBcCdD",
+];
+
+for (let test of tests) {
+  logOutList(lengthOfLongestSubstring(test));
+}
