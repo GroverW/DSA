@@ -5,7 +5,11 @@ export const printGrid = (grid) => (
   ]`
 )
 
-export const printRow = (row) => `[${row.join(',\t')}]`;
+export const printRow = (row) => {
+  return row.every((val) => typeof val === 'string')
+    ? `["${row.join('",\t"')}"]`
+    : `[${row.join(',\t')}]`;
+}
 
 export const randomize = (arr) => {
   const randomized = [...arr];
