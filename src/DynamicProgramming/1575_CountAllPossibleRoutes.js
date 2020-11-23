@@ -86,6 +86,37 @@ var countRoutes = function (locations, start, finish, fuel) {
   return numWays;
 };
 
+// for post
+var countRoutes = function (locations, start, finish, fuel) {
+  const mod = 10 ** 9 + 7;
+
+  const waysToReach = new Array(locations.length).fill(0)
+    .map(() => new Array(fuel + 1).fill(0));
+
+  waysToReach[start][0] = 1;
+  let waysToReachFinish = waysToReach[finish][0];
+
+  for (let currFuel = 1; currFuel <= fuel; currFuel += 1) {
+    for (let to = 0; to < locations.length; to += 1) {
+      for (let from = 0; from < locations.length; from += 1) {
+        if (from === to) continue;
+
+        const distBetweenLocations = Math.abs(locations[to] - locations[from]);
+        
+        if (distBetweenLocations > currFuel) continue;
+
+        const remFuel = currFuel - distBetweenLocations;
+
+        waysToReach[to][currFuel] = (waysToReach[to][currFuel] + waysToReach[from][remFuel]) % mod;
+      }  
+    }
+    
+    waysToReachFinish = (waysToReachFinish + waysToReach[finish][currFuel]) % mod;
+  }
+
+  return waysToReachFinish;
+};
+
 /*
   [[0, 1, 2, 4, 6] 1, 4, 5 
   [0, 1, 0, 0, 0] 0
@@ -110,7 +141,7 @@ var countRoutes = function (locations, start, finish, fuel) {
 
 
 const tests = [
-  [[2, 3, 6, 8, 4], 1, 3, 5],
+  [[2, 3, 4, 6, 8], 1, 3, 5],
   [[4, 3, 1], 1, 0, 6],
   [[5, 2, 1], 0, 2, 3],
   [[2, 1, 5], 0, 0, 3],
@@ -153,7 +184,7 @@ const tests = [
   ],
   [
     [73, 87, 60, 68, 89, 10, 48, 8, 11, 4, 43, 38, 93, 12, 88, 96, 86, 16, 34, 19, 94],
-    [18, 3, 17]
+    18, 3, 17
   ]
 
 ];
@@ -223,4 +254,5 @@ for (let test of tests) {
 18
 3
 17
+
 */
