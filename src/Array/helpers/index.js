@@ -1,14 +1,14 @@
 
 export const printGrid = (grid) => (
   `[
-    ${grid.map((row) => printRow(row)).join(',\n')}
-  ]`
+    ${grid.map((row) => printRow(row)).join('\n')}
+  ],`
 )
 
 export const printRow = (row) => {
   return row.every((val) => typeof val === 'string')
-    ? `["${row.join('",\t"')}"]`
-    : `[${row.join(',\t')}]`;
+    ? `["${row.join('",\t"')}"],`
+    : `[${row.join(',\t')}],`;
 }
 
 export const randomize = (arr) => {
