@@ -40,12 +40,11 @@ var validTicTacToe = function (board) {
   let oCount = 0;
   let xCount = 0;
 
-  for (let i = 3; i >= 1; i -= 1) {
-    for (let j = 3; j >= 1; j -= 1) {
-      if (board[i - 1][j - 1] === 'X') xCount += 1;
-      else if (board[i - 1][j - 1] === 'O') oCount += 1;
-    }
-  }
+  board.forEach((row) =>
+    row.forEach((move) => {
+      xCount += move === 'X';
+      oCount += move === 'O';
+    }));
 
   if (xCount >= 3) xWinner = checkIfWinner(board, 'X');
   if (oCount >= 3) oWinner = checkIfWinner(board, 'O');
