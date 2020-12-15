@@ -1,15 +1,34 @@
 
-export const printGrid = (grid) => (
-  `[
-    ${grid.map((row) => printRow(row)).join('\n')}
-  ],`
-)
+export const format = (element) => {
+  if (Array.isArray(element)) {
+    return printRow(element);
+  } if (typeof element === 'string') {
+    return `"${element}"`;
+  } else if (typeof element === 'number') {
+    return element;
+  } else if (typeof element === 'undefined') {
+    return 'undefined';
+  } else if (typeof element === 'boolean') {
+    return element ? 'true' : 'false';
+  } else if (Number.isNaN(element)) {
+    return 'NaN';
+  } else if (!element) {
+    return 'null';
+  } else {
+    return element;
+  }
+}
 
 export const printRow = (row) => {
-  return row.every((val) => typeof val === 'string')
-    ? `["${row.join('",\t"')}"],`
-    : `[${row.join(',\t')}],`;
+  const formatted = row.map((item) => format(item)).join(',')
+  return `[${formatted}]`
 }
+
+export const printGrid = (grid) => (
+  `[
+    ${grid.map((row) => printRow(row)).join('\n')},
+  ],`
+)
 
 export const randomize = (arr) => {
   const randomized = [...arr];
