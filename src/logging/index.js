@@ -8,3 +8,9 @@ export const logOutList = (data) => {
   listItem.innerText = data;
   outputList.appendChild(listItem);
 }
+
+export const padNumber = (num, digits, character = '0') => {
+  const numStr = num.toString();
+  const numLength = numStr.length;
+  return character.repeat(Math.max(0, digits - numLength)) + numStr;
+}
