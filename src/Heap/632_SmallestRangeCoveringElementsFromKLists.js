@@ -40,7 +40,63 @@ nums.length == k
 nums[i] is sorted in non-decreasing order.
 */
 
-// heap (can find optimizations on this)
+// smarter heap
+var smallestRange = function (nums) {
+  let max = nums.reduce((maxVal, list) => Math.max(maxVal, list[0]), Number.MIN_SAFE_INTEGER);
+  let minDistance = Number.MAX_SAFE_INTEGER;
+  let minRange;
+
+  heapify(nums);
+
+  while (true) {
+    const min = nums[0][0];
+    const nextNum = nums[0][1];
+
+    if (min === false) return minRange;
+
+    if (max - min < minDistance) {
+      minDistance = max - min;
+      minRange = [min, max];
+    }
+
+    max = nextNum === undefined ? max : Math.max(max, nextNum);
+    if (pop(nums) === false) return minRange;
+  }
+};
+
+const heapify = (nums) => {
+  const start = Math.floor(nums.length / 2) - 1;
+
+  for (let i = start; i >= 0; i -= 1) {
+    siftDown(i, nums);
+  }
+}
+
+const pop = (heap) => {
+  const res = heap[0].shift();
+  if (!heap[0].length) return false;
+  siftDown(0, heap);
+  return res;
+}
+
+const siftDown = (start, heap) => {
+  let current = start;
+  while (true) {
+    const left = current * 2 + 1;
+    const right = left + 1;
+    let next = current;
+
+    if (heap[left] && heap[left][0] < heap[next][0]) next = left;
+    if (heap[right] && heap[right][0] < heap[next][0]) next = right;
+
+    if (next !== current) {
+      [heap[current], heap[next]] = [heap[next], heap[current]];
+      current = next;
+    } else break;
+  }
+}
+
+// janky heap
 var smallestRange = function (nums) {
   const currentPosition = new Array(nums.length).fill(0);
   const startPosition = new Array(nums.length).fill(0);
