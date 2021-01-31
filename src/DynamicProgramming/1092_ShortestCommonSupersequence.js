@@ -45,8 +45,7 @@ var shortestCommonSupersequence = function (str1, str2) {
   while (i < s1Len && j < s2Len) {
     const addS1 = edits[i + 1][j];
     const addS2 = edits[i][j + 1];
-    const same = edits[i + 1][j + 1];
-    if (edits[i][j] - same <= 1 && same < Math.min(addS1, addS2)) {
+    if (str1[i] === str2[j]) {
       shortestSuperSequence += str1[i];
       i += 1;
       j += 1;
