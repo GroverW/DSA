@@ -26,6 +26,8 @@ You may assume k is always valid, ie: k is always smaller than input array's siz
 Answers within 10^-5 of the actual value will be accepted as correct.
 */
 
+// (people doing binary search + splice are getting better runtimes)
+// w/ heap
 var medianSlidingWindow = function (nums, k) {
   const minHeap = new Heap((a, b) => nums[a] < nums[b]);
   const maxHeap = new Heap((a, b) => nums[a] > nums[b]);
