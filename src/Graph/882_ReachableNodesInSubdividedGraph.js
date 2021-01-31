@@ -51,10 +51,9 @@ var reachableNodes = function (edges, M, N) {
   while (queue.length) {
     const [node, movesRemain] = pop(queue);
 
-    if (best[node] >= movesRemain) continue;
-    totalVisited += best[node] < 0;
+    if (best[node] >= 0) continue;
+    totalVisited += 1;
     best[node] = movesRemain;
-    if (!best[node]) continue;
 
     for (let neighbor of adjList[node]) {
       const [to, cost, edge] = neighbor;
