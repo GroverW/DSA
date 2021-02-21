@@ -40,6 +40,14 @@ export const randomize = (arr) => {
   return randomized;
 }
 
+export const randomOption = (options) => {
+  const option = Math.floor(Math.random() * options.length);
+  return options[option];
+}
+
+export const numberBetween = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1)) + min;
+
 export const randomizeGrid = (grid) => {
   const height = grid.length;
   const width = grid[0].length;
