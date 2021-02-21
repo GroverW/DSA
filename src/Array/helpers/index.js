@@ -48,6 +48,12 @@ export const randomOption = (options) => {
 export const numberBetween = (min, max) =>
   Math.floor(Math.random() * (max - min + 1)) + min;
 
+export const randomLetter = (upperCase = false, limit = 26) =>
+  upperCase
+    ? randomOption('ABCDEFGHIJKLMNOPQRSTUVWXYZ'.slice(0, limit))
+    : randomOption('abcdefghijklmnopqrstuvwxyz'.slice(0, limit));
+  
+
 export const randomizeGrid = (grid) => {
   const height = grid.length;
   const width = grid[0].length;
