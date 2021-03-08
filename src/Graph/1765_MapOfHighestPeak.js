@@ -39,6 +39,8 @@ n == isWater[i].length
 1 <= m, n <= 1000
 isWater[i][j] is 0 or 1.
 There is at least one water cell.
+
+POST: https://leetcode.com/problems/map-of-highest-peak/discuss/1088712/javascript-bfs-480ms
 */
 
 var highestPeak = function(isWater) {

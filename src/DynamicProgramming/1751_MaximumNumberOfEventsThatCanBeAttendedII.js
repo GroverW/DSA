@@ -37,6 +37,9 @@ Constraints:
 1 <= k * events.length <= 106
 1 <= startDayi <= endDayi <= 109
 1 <= valuei <= 106
+
+
+POST: https://leetcode.com/problems/maximum-number-of-events-that-can-be-attended-ii/discuss/1084264/javascript-bottom-up-dp-200ms
 */
 
 

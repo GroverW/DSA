@@ -25,6 +25,8 @@ Constraints:
 1 <= cars.length <= 105
 1 <= positioni, speedi <= 106
 positioni < positioni+1
+
+POST: https://leetcode.com/problems/car-fleet-ii/discuss/1087309/javascript-stack
 */
 
 var getCollisionTimes = function (cars) {

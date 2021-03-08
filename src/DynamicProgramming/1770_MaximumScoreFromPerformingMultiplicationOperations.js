@@ -39,6 +39,8 @@ m == multipliers.length
 1 <= m <= 103
 m <= n <= 105
 -1000 <= nums[i], multipliers[i] <= 1000
+
+POST: https://leetcode.com/problems/maximum-score-from-performing-multiplication-operations/discuss/1077080/javascript-bottom-up-dp
 */
 
 var maximumScore = function(nums, multipliers) {
