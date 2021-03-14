@@ -77,7 +77,7 @@ aggregated runtime over 10 tests for each
 99.99999%       61.802    196.73
 99.999999%      62.346    239.41
 
-POST - https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/discuss/1107981/javascript-ran-some-additional-tests-for-fun-n-107
+POST: https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/discuss/1107981/javascript-ran-some-additional-tests-for-fun-n-107
 */
 
 var findMinBinary = function (nums) {
