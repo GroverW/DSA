@@ -1,0 +1,1 @@
+export type Iterable = string | any[];
