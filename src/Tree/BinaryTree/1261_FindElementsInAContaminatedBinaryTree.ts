@@ -67,6 +67,40 @@ Total calls of find() is between [1, 10^4]
 
 import { buildTree, TreeNode } from '../helpers';
 
+// easy way
+class FindElements {
+  root: TreeNode | null;
+  lookup: Set<number | null>;
+
+  constructor(root: TreeNode | null) {
+    this.root = root;
+    if (this.root) {
+      this.root.val = 0;
+    }
+    this.lookup = new Set();
+    this.reconstruct(this.root);
+  }
+
+  reconstruct(node: TreeNode | null) {
+    if (!node) return;
+    this.lookup.add(node.val);
+    
+    if(node.left) {
+      node.left.val = node.val! * 2 + 1;
+      this.reconstruct(node.left);
+    }
+    if(node.right) {
+      node.right.val = node.val! * 2 + 2;
+      this.reconstruct(node.right);
+    }
+  }
+
+  find(target: number): boolean {
+    return this.lookup.has(target);
+  }
+}
+
+// hard way
 class FindElementsBinarySearch {
   root: TreeNode | null;
 
@@ -110,39 +144,6 @@ class FindElementsBinarySearch {
 }
 
 
-// easy way
-class FindElements {
-  root: TreeNode | null;
-  lookup: Set<number | null>;
-
-  constructor(root: TreeNode | null) {
-    this.root = root;
-    if (this.root) {
-      this.root.val = 0;
-    }
-    this.lookup = new Set();
-    this.reconstruct(this.root);
-  }
-
-  reconstruct(node: TreeNode | null) {
-    if (!node) return;
-    this.lookup.add(node.val);
-    
-    if(node.left) {
-      node.left.val = node.val! * 2 + 1;
-      this.reconstruct(node.left);
-    }
-    if(node.right) {
-      node.right.val = node.val! * 2 + 2;
-      this.reconstruct(node.right);
-    }
-  }
-
-  find(target: number): boolean {
-    return this.lookup.has(target);
-  }
-}
-
 /*
                               0
                       1             2
@@ -153,21 +154,6 @@ class FindElements {
 
 
 */
-
-// const maxLen: number = 100;
-
-// for (let i = 0; i < 50; i += 1) {
-//   const len: number = numberBetween(1, maxLen);
-//   const nums: number[] = new Array(len).fill(0).map((_, i) => i + 1);
-//   const randomized: number[] = randomize(nums);
-
-
-//   // logOutList('"' + parenString + '",')
-//   // logOutList(printRow([nums, k]) + ',')
-//   // logOutList(printRow([s, t]) + ',');
-//   // logOutList(numberBetween(1, 100) + ',');
-//   logOutList(printRow(randomized))
-// }
 
 const tests: any[] = [
   [
