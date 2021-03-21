@@ -4,7 +4,7 @@
   "description": "",
   "main": "test.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npx webpack --watch --mode='development'"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +13,8 @@
     "webpack": "^4.44.1"
   },
   "devDependencies": {
+    "ts-loader": "^8.0.18",
+    "typescript": "^4.2.3",
     "webpack-cli": "^3.3.12"
   }
 }
