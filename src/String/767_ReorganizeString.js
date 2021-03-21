@@ -16,6 +16,31 @@ Note:
 S will consist of lowercase letters and have length in range [1, 500].
 */
 
+// w/ sort
+var reorganizeString = function (s) {
+  const reorganized = s.split('')
+  const counts = reorganized.reduce((counts, letter) => {
+    counts[letter] = counts[letter] + 1 || 1;
+    return counts;
+  }, {});
+  
+  const letterCounts = Object.entries(counts)
+    .sort((countsA, countsB) => countsA[1] - countsB[1])
+  
+  if (letterCounts[letterCounts.length - 1][1] > Math.ceil(s.length / 2)) return '';
+  
+  let idx = 1;
+  for (let [letter, count] of letterCounts) {
+    for (let i = 0; i < count; i++) {
+      if (idx >= s.length) idx = 0;
+      reorganized[idx] = letter;
+      idx += 2;
+    }
+  }
+  return reorganized.join('');
+};
+
+// w/ heap (too complicated)
 var reorganizeString = function (S) {
   const freq = {};
   let max = 0;
