@@ -1,5 +1,5 @@
 
-import { Iterable } from './types';
+import { Indexable } from './types';
 
 export const format = <Type>(element: Type): string | Type => {
   if (Array.isArray(element)) {
@@ -42,7 +42,7 @@ export const randomize = <Type>(arr: Type[]): Type[] => {
   return randomized;
 }
 
-export const randomOption = (options: Iterable): any => {
+export const randomOption = <Type extends Indexable>(options: Type): Type => {
   const option: number = Math.floor(Math.random() * options.length);
   return options[option];
 }
