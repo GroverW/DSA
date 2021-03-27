@@ -1,4 +1,5 @@
 import { CanConvertToString } from './types';
+import { format } from '../Array/helpers';
 
 let outputList: (HTMLElement | null) = document.getElementById('output-list');
 
@@ -13,6 +14,12 @@ export const logOutList = (data: CanConvertToString): void => {
   const listItem: HTMLElement = document.createElement('li')
   listItem.textContent = <string>data;
   outputList?.appendChild(listItem);
+}
+
+export const logOutLeetcode = (row: CanConvertToString[]): void => {
+  row.forEach((testParam) => {
+    logOutList(format(testParam));
+  });
 }
 
 export const padNumber = (
