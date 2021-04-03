@@ -2,7 +2,7 @@ import { TreeNodeInterface, TreeVal, SerializedTree } from './types'
 
 export class TreeNode implements TreeNodeInterface {
   val: TreeVal;
-  left:  TreeNodeInterface | null;
+  left: TreeNodeInterface | null;
   right: TreeNodeInterface | null;
 
   constructor(
@@ -94,4 +94,96 @@ export const getFirstNodeByValue = (root: TreeNode, target: number): TreeNode | 
   }
 
   return null;
+}
+
+type RandomTree = {
+  size: number;
+  start?: number;
+  startingNullChance?: number;
+  maxNullChance?: number;
+  incrementNullChance?: boolean;
+}
+
+export const randomizeTree = ({
+  size,
+  start = 0,
+  startingNullChance = 0.05,
+  maxNullChance = 0.2,
+  incrementNullChance = true,
+}: RandomTree): SerializedTree => {
+  const tree: SerializedTree = [start];
+
+  let i = 1;
+  let lastValidParent = 0;
+  let current = start + 1;
+  let currentNullChance = startingNullChance;
+  const MAX_NULL_CHANCE = maxNullChance;
+  const NULL_INCREMENT = (MAX_NULL_CHANCE - startingNullChance) / size;
+
+  while (i < size) {
+    const parent = Math.ceil(tree.length / 2) - 1;
+    if (parent > lastValidParent) break;
+    if (tree[parent] === null || Math.random() < currentNullChance) {
+      tree.push(null);
+    } else {
+      lastValidParent = tree.length;
+      tree.push(current);
+      current += 1;
+      i += 1;
+      if (incrementNullChance) {
+        currentNullChance = Math.min(MAX_NULL_CHANCE, currentNullChance + NULL_INCREMENT);
+      }
+    }
+  }
+
+  let j = 0;
+  while (i < size) {
+    if (j === tree.length) {
+      tree.push(i);
+      i += 1;
+    } else if (tree[j] === null) {
+      tree[j] = i;
+      i += 1;
+    }
+
+    j += 1;
+  }
+
+  while (tree[tree.length - 1] === null) {
+    tree.pop();
+  }
+
+  return tree;
+}
+
+export const convertToBST = (tree: SerializedTree): SerializedTree => {
+  let current = 1;
+  const convert = (idx) => {
+    if (idx >= tree.length || tree[idx] === null) return;
+    const left = idx * 2 + 1;
+    const right = left + 1;
+    convert(left);
+    tree[idx] = current;
+    current += 1;
+    convert(right);
+  }
+
+  convert(0);
+
+  return tree;
+}
+
+export const getTreeEdges = (tree: SerializedTree): SerializedTree[] => {
+  const lastParent = Math.floor(tree.length / 2) - 1;
+  const edges: SerializedTree[] = [];
+
+  for (let i = 0; i <= lastParent; i += 1) {
+    if (!tree[i]) continue;
+    const left = i * 2 + 1;
+    const right = left + 1;
+    if (tree[left]) edges.push([tree[i], tree[left]]);
+    if (tree[right]) edges.push([tree[i], tree[right]]);
+  }
+
+  return edges;
 }
