@@ -30,16 +30,13 @@ Constraints:
 var maxAbsoluteSum = function(nums) {
   let maxPositive = 0;
   let maxNegative = 0;
-  let maxSum = 0;
   
-  for(let num of nums) {
+  return nums.reduce((maxSum, num) => {
     maxPositive = Math.max(0, num, maxPositive + num);
     maxNegative = Math.min(0, num, maxNegative + num);
-    maxSum = Math.max(maxSum, maxPositive, Math.abs(maxNegative));
-  }
-  
-  return maxSum;
-};
+    return Math.max(maxSum, maxPositive, Math.abs(maxNegative));
+  }, 0)
+}
 
 const maxLen = 100;
 
